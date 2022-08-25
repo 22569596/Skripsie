@@ -1,4 +1,4 @@
-%PEED CALCULATIONS FROM SAMPLED DOPPLER RADAR
+%SPEED CALCULATIONS FROM SAMPLED DOPPLER RADAR
 
 %read data in from WAV file
 [y,Fs] = audioread('real_sensor1.wav');
@@ -30,7 +30,7 @@ for n=1:1:frames
            max_FFT_index=x;
         end
     end
-frequency = max_FFT_index*44100/(length);
+frequency = max_FFT_index*Fs/(length);
 speed_kmh = frequency/47.98;
 speed(n)=speed_kmh;
 end
