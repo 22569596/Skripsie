@@ -1,7 +1,7 @@
 %TRACKING OF A SINGLE VEHCILE
 
 %read data in from WAV file
-%[y,Fs] = audioread('real_sensor1.wav');
+%[y,Fs] = audioread('high.wav');
 
 %DEFINE PARAMETERS
 %length of STFT in samples
@@ -13,7 +13,7 @@ frames = frames(1)-1;
 %Create empty arrays to store frequency and sample array
 tracked_speed = zeros(frames,1);
 speed=0;
-speedLimit=20;
+speedLimit=0;
 frequency=0;
 sample_Array = zeros(length,1);
 %Create bins
