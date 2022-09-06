@@ -1,12 +1,12 @@
 %read data in from WAV file
-[y,Fs] = audioread('high.wav');
+[y,Fs] = audioread('real_car_testE.wav');
 
 %DEFINE PARAMETERS
 %length of STFT in samples
 length=8000;
 timeStep=length/Fs;
 %frames calculation
-frames = round(size(c)/length);
+frames = round(size(y)/length);
 frames = frames(1)-1;
 %Create empty arrays to store frequency and sample array
 tracked_speed1 = zeros(frames,1);
@@ -18,7 +18,7 @@ f1=0;
 xp=0;
 sample_Array = zeros(length,1);
 %Create bins Size and SNR
-SNR=650;
+SNR=1;
 %binSize = ((timeStep)^2)*431.01;
 binSize=10;
 
@@ -36,7 +36,7 @@ for n=1:1:frames
     avg1=0;
     avg2=0;
     for b = 1:1:length
-       sample_Array(b)=c(b+length*(n-1));
+       sample_Array(b)=y(b+length*(n-1));
     end
     g=abs(fft(sample_Array));
     
@@ -86,11 +86,11 @@ for n=1:1:frames
     end
     avg2 = avg2/num2;
     
-    speed1=(avg1*Fs/length)/47.98;
+    speed1=(avg1*Fs/length)/19.49;
     if speed1>=speedLimit
        tracked_speed1(n)=speed1;
     end
-    speed2=(avg2*Fs/length)/47.89;
+    speed2=(avg2*Fs/length)/19.49;
     if speed2>=speedLimit
        tracked_speed2(n)=speed2;
     end
@@ -104,3 +104,8 @@ hold off
 plot(tracked_speed1);
 hold on
 plot(tracked_speed2);
+grid on
+xlabel('Frames(n)')
+ylabel('Speed (km/h)')
+title('Tracking of Two objects with minimum speed')
+legend('Object1','Object2')
