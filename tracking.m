@@ -1,25 +1,5 @@
 %TRACKING OF A SINGLE VEHCILE
 
-%read data in from WAV file
-%[y,Fs] = audioread('high.wav');
-
-%DEFINE PARAMETERS
-%length of STFT in samples
-length=4000;
-timeStep=length/Fs;
-%frames calculation
-frames = round(size(y)/length);
-frames = frames(1)-1;
-%Create empty arrays to store frequency and sample array
-tracked_speed = zeros(frames,1);
-speed=0;
-speedLimit=0;
-frequency=0;
-sample_Array = zeros(length,1);
-%Create bins
-SNR=500;
-bins = ((timeStep)^2)*431.01;
-
 %Tracking calculation
 for n=1:1:frames
     max_FFT_index=0;
@@ -28,7 +8,7 @@ for n=1:1:frames
        sample_Array(b)=y(b+length*(n-1));
     end
     g=abs(fft(sample_Array));
-    for x = 1:1:length/2
+    for x = 10:1:length/2
         if max_FFT<g(x)
            max_FFT=g(x);
            max_FFT_index=x;
@@ -36,7 +16,7 @@ for n=1:1:frames
     end
     if max_FFT>SNR
         if abs(frequency-max_FFT_index)<=round(bins)
-            speed=(frequency*Fs/length)/47.89;
+            speed=(frequency*Fs/length)/19.49;
             if speed>=speedLimit
                 tracked_speed(n)=speed;
             end
