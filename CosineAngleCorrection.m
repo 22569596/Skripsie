@@ -1,7 +1,7 @@
 %Cosine Angle Correction for a single tracked vehicle
 
 %Tracking calculation
-for n=1:1:frames
+for n=startFrame:1:endFrame
     max_FFT_index=0;
     max_FFT=0;
     for b = 1:1:length
