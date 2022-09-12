@@ -10,7 +10,7 @@ Fs = Fs/downSampleRate;
 % Length of STFT in samples
 length=3500;
 timeStep=length/Fs;
-overlap=0.25;
+overlap=0.35;
 
 % Frames calculation
 frames = round(size(y)/length);
@@ -18,7 +18,8 @@ frames = frames(1)-1;
 startFrame=1;
 endFrame=frames;
 % Create empty arrays to store frequency and sample array
-tracked_speed = zeros(frames,1);
+tracked_speed1 = [0 0];
+tracked_speed2 = [0 0];
 sample_Array = zeros(length,1);
 
 % Create variables for speed calculation and Speed Limits
@@ -37,7 +38,7 @@ tracked=0;
 
 % Maximum measuring distance and distance from road
 Rmax=60;
-d=3;
+d=7.5;
 R=Rmax;
 
 % Cosine Angle Coeff

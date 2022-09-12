@@ -1,5 +1,5 @@
 %TRACKING OF A SINGLE VEHCILE
-
+num=1;
 %Tracking calculation
 for n=startFrame:1:endFrame
     max_FFT_index=0;
@@ -18,15 +18,16 @@ for n=startFrame:1:endFrame
         if abs(frequency-max_FFT_index)<=round(bins)
             speed=(frequency*Fs/length)/19.49;
             if speed>=speedLimit
-                tracked_speed(n)=speed;
+                tracked_speed1(num)=speed;
+                num=num+1;
             end
         else
-            speed=0;
+            
         end
     end
      frequency=max_FFT_index;
 end
-plot(tracked_speed);
+plot(tracked_speed1);
 title('Measured Speed');
 xlabel('Samples(n)');
 ylabel('Speed(km/h)');
