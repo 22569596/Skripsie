@@ -1,15 +1,16 @@
 % Parameters File
 
 % Data in from WAV file
-[y,Fs] = audioread('CRUISECONTROL.wav');
+[y,Fs] = audioread('CruiseControlTrip.wav');
 
 % Downsample audio file
-downSampleRate =4;
+downSampleRate = 4;
 y = downsample(y,downSampleRate);
 Fs = Fs/downSampleRate;
 % Length of STFT in samples
 length=3500;
 timeStep=length/Fs;
+overlap=0.25;
 
 % Frames calculation
 frames = round(size(y)/length);
@@ -35,8 +36,8 @@ SNR=0.4;
 tracked=0;
 
 % Maximum measuring distance and distance from road
-Rmax=50;
-d=4;
+Rmax=60;
+d=3;
 R=Rmax;
 
 % Cosine Angle Coeff
