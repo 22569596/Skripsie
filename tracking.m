@@ -1,14 +1,14 @@
 %TRACKING OF A SINGLE VEHCILE
 
 %Tracking calculation
-for n=1:1:frames
+for n=startFrame:1:endFrame
     max_FFT_index=0;
     max_FFT=0;
     for b = 1:1:length
-       sample_Array(b)=y(b+length*(n-1));
+       sample_Array(b)=y(b+length*(n-1)-(overlap*length)*(n-1));
     end
     g=abs(fft(sample_Array));
-    for x = 10:1:length/2
+    for x =(round(speedLimit*19.49*length/Fs)):1:length/2
         if max_FFT<g(x)
            max_FFT=g(x);
            max_FFT_index=x;
@@ -27,3 +27,8 @@ for n=1:1:frames
      frequency=max_FFT_index;
 end
 plot(tracked_speed);
+title('Measured Speed');
+xlabel('Samples(n)');
+ylabel('Speed(km/h)');
+grid on;
+%spectrogram(y,kaiser(256,5),220,512,Fs,'yaxis')
