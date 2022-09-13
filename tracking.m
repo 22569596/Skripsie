@@ -17,12 +17,12 @@ for n=startFrame:1:endFrame
     if max_FFT>SNR
         if abs(frequency-max_FFT_index)<=round(bins)
             speed=(frequency*Fs/length)/19.49;
-            if speed>=speedLimit
-                tracked_speed1(num)=speed;
-                num=num+1;
+            if speed>=speedLimit && speed<60
+                tracked_speed1(n)=speed;
+
             end
         else
-            
+            speed=0;
         end
     end
      frequency=max_FFT_index;

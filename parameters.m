@@ -1,16 +1,16 @@
 % Parameters File
 
 % Data in from WAV file
-[y,Fs] = audioread('CruiseControlTrip.wav');
+[y,Fs] = audioread('acceleration.wav');
 
 % Downsample audio file
-downSampleRate = 4;
+downSampleRate = 1;
 y = downsample(y,downSampleRate);
 Fs = Fs/downSampleRate;
 % Length of STFT in samples
-length=3500;
+length=14000;
 timeStep=length/Fs;
-overlap=0.35;
+overlap=0.1;
 
 % Frames calculation
 frames = round(size(y)/length);
@@ -25,13 +25,13 @@ sample_Array = zeros(length,1);
 % Create variables for speed calculation and Speed Limits
 frequency=0;
 speed=0;
-speedLimit=10;
+speedLimit=20;
 
 % Create bins
 bins = ((timeStep)^2)*431.01;
 
 % Signal to Noise Ratio
-SNR=0.4;
+SNR=0.1;
 
 % Tracking Flag
 tracked=0;
